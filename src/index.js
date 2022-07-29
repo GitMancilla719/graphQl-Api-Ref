@@ -13,7 +13,9 @@ const RunApolloServer = async () => {
 
   const server = new ApolloServer({
     typeDefs,
-    resolvers: resolvers,
+    resolvers,
+    csrfPrevention: true, // any clients that send operations via GET requests or multipart upload requests must include a non-empty Apollo-Require-Preflight
+    cache: 'bounded', // protects your server from attacks that exhaust available memory, causing a DOS
     context: ({ req }) => ({ 
       req,
       Accounts
